@@ -1,14 +1,8 @@
-import './App.css'
+import "./App.css";
+import AppRoute from "./routes/app-route";
 
 function App() {
-
-  return (
-    <>
-      <div>
-        TGR Frontend
-      </div>
-    </>
-  )
+  return <AppRoute />;
 }
 
-export default App
+export default App;
