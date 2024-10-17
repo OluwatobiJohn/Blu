@@ -2,6 +2,11 @@ import { lazy } from "react";
 
 export const authPagesRoute = [
   {
+    path: "register",
+    exact: true,
+    component: lazy(() => import("@/pages/authentication/Register")),
+  },
+  {
     path: "login",
     exact: true,
     component: lazy(() => import("@/pages/authentication/Login")),
