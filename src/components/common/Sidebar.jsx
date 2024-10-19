@@ -16,7 +16,7 @@ const Sidebar = () => {
   return (
     <div>
       {!isSideBarOpen && (
-        <div className="absolute z-50 left-1 md:left-[16.5rem] top-3 cursor-pointer">
+        <div className="absolute z-50 left-1 md:left-[17rem] top-3 cursor-pointer">
           <Menu onClick={handleToggle} />
         </div>
       )}
@@ -43,7 +43,7 @@ const Sidebar = () => {
             />
           ))}
         </div>
-        <div className="text-white mt-8">
+        <div className="text-white mt-28">
           {SIDEBAR_CONSTANTS.slice(7, 9).map((item, index) => (
             <SidebarItem
               key={item.link || index}
