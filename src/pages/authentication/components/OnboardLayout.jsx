@@ -8,7 +8,7 @@ const OnboardLayout = () => {
   return (
     <div>
       <div></div>
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-[1440px] mx-auto p-8">
         <div className="flex flex-row">
           <div className="hidden lg:block">
             {(location.pathname === "/auth/login" ||
