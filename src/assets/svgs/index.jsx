@@ -11,6 +11,7 @@ import LogoutIcon from "./logout.svg?react";
 import WalletIcon from "./walleticon.svg?react";
 import NotificationIcon from "./notificationicon.svg?react";
 import ProfileIconRounded from "./profileicon.svg?react";
+import TGRLogo from "./TGR.svg?react";
 
 export {
   HomeIcon,
@@ -26,4 +27,5 @@ export {
   WalletIcon,
   NotificationIcon,
   ProfileIconRounded,
+  TGRLogo,
 };

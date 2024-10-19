@@ -27,7 +27,7 @@ const Login = () => {
             </div>
             <div className="mt-5">
               <label className="text-sm">Password</label>
-              <PasswordInput />
+              <PasswordInput/>
             </div>
             <div className="mt-5 flex flex-row items-center gap-2">
               <Input className="w-max" type="checkbox" />
