@@ -15,16 +15,16 @@ const Sidebar = () => {
 
   return (
     <div>
+      {!isSideBarOpen && (
+        <div className="absolute z-50 left-1 md:left-[16.5rem] top-3 cursor-pointer">
+          <Menu onClick={handleToggle} />
+        </div>
+      )}
       <div
-        className={`fixed top-0 left-0 h-max bg-[#101928] z-40 transform ${
+        className={`fixed top-0 left-0 h-screen bg-[#101928] z-40 transform ${
           isSideBarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform md:relative md:translate-x-0 w-64 md:w-64 py-4 px-2 md:block`}
+        } transition-transform md:relative md:translate-x-0 w-64 md:w-64 py-4 px-2 md:block overflow-y-auto`}
       >
-        {!isSideBarOpen && (
-          <div className="absolute left-[17rem] cursor-pointer">
-            <Menu onClick={handleToggle} />
-          </div>
-        )}
         <div className="flex flex-row items-center justify-between">
           <img src={logodashboard} alt="logo" className="ml-5" />{" "}
           <X
