@@ -6,7 +6,6 @@ const Table = ({
   columns,
   itemsPerPage,
   setItemsPerPage,
-  totalPages,
   currentPage,
   setcurrentPage,
 }) => {
@@ -14,14 +13,23 @@ const Table = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
 
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage); // Dynamically calculate total pages
+
   useEffect(() => {
+    // Filter data based on search term
     const filtered = data.filter((item) =>
       Object.values(item).some((value) =>
         value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
       )
     );
     setFilteredData(filtered);
-  }, [data, searchTerm, itemsPerPage]);
+  }, [data, searchTerm]);
+
+  // Handle pagination by slicing data for current page
+  const paginatedData = filteredData.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   const handleChangePage = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
@@ -29,11 +37,8 @@ const Table = ({
     }
   };
 
-  const handleChangeItemsPerPage = (newItemsPerPage) => {
-    setItemsPerPage(newItemsPerPage);
-  };
-
   useEffect(() => {
+    // Create an array of numbers for pagination buttons
     const numbersArray = [];
     for (let i = 1; i <= totalPages; i++) {
       numbersArray.push(i);
@@ -63,26 +68,26 @@ const Table = ({
         <thead>
           <tr className="bg-[#F8FAFC]">
             {columns.map((column) => (
-              <th key={column.key} className="p-2 border-b text-left">
+              <th key={column.key} className="px-2 py-5 border-b text-left">
                 {column.header}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {filteredData.length === 0 && (
+          {paginatedData.length === 0 && (
             <tr>
               <td colSpan={columns.length + 1} className="text-center py-4">
                 <p className="text-red-500">No Results Found</p>
               </td>
             </tr>
           )}
-          {filteredData.map((item, index) => (
+          {paginatedData.map((item, index) => (
             <tr key={index} className="hover:bg-[#cfdef8]">
               {columns
                 .filter((column) => !column.isCheckbox)
                 .map((column) => (
-                  <td key={column.key} className="p-2 border-b">
+                  <td key={column.key} className="py-5 px-2 border-b">
                     {column.editCell
                       ? column.editCell(item)
                       : getNestedPropertyValue(item, column.key) || "-"}
@@ -92,22 +97,21 @@ const Table = ({
           ))}
         </tbody>
       </table>
+
       <div className="w-full mt-4 flex justify-between items-center gap-4">
-        {/* Page count on the left */}
         <div className="flex-1">
           <span className="text-sm text-gray-600">{`Page ${currentPage} of ${totalPages}`}</span>
         </div>
 
-        {/* Page numbers in the center */}
         <div className="flex justify-center gap-2">
           {numbers.map((page, index) => {
             return (
               <button
                 key={index}
-                className={`${
+                className={`max-w-1 flex justify-center border-none ${
                   currentPage === page
-                    ? "bg-[#2563EB] text-white"
-                    : "bg-[#F8FAFC] text-black"
+                    ? "bg-[#FFECE5] text-[#EA0000]"
+                    : "text-black"
                 } px-3 py-1 border rounded text-sm`}
                 onClick={() => handleChangePage(page)}
               >
@@ -123,7 +127,7 @@ const Table = ({
             disabled={currentPage === 1}
             className="flex flex-row items-center gap-2 px-3 py-1 border rounded bg-[#F8FAFC] text-sm text-black disabled:opacity-50"
           >
-            <span> &#8249;</span> <p>Previous</p>
+            <span>&larr;</span> <p>Previous</p>
           </button>
 
           <button
@@ -132,7 +136,7 @@ const Table = ({
             className="flex flex-row items-center gap-2 px-3 py-1 border rounded bg-[#F8FAFC] text-sm text-black disabled:opacity-50"
           >
             <p>Next</p>
-            <span> &#8250;</span>
+            <span>&rarr;</span>
           </button>
         </div>
       </div>
