@@ -68,7 +68,9 @@
 
 
 
-body {}
+body {
+  font-family: 'Inter', sans-serif;
+}
 
 
 
@@ -76,6 +78,7 @@ body {}
   background-image: url("../src/assets/imgs/loginbgmain.png");
   background-size: cover;
 }
+
 .bg-main-forgot-password {
   background-image: url("../src/assets/imgs/forgotpasswordbgmain.png");
   background-size: cover;

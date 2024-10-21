@@ -12,6 +12,12 @@ import WalletIcon from "./walleticon.svg?react";
 import NotificationIcon from "./notificationicon.svg?react";
 import ProfileIconRounded from "./profileicon.svg?react";
 import TGRLogo from "./TGR.svg?react";
+import TransferActionIcon from "./transferaction.svg?react";
+import WithdrawActionIcon from "./withdrawaction.svg?react";
+import WalletActionIcon from "./walletaction.svg?react";
+import BlueAirtimeIcon from "./blueairtime.svg?react";
+import BlueMobileDataIcon from "./bluemobiledata.svg?react";
+import BlueSMEDataIcon from "./bluesmedata.svg?react";
 
 export {
   HomeIcon,
@@ -28,4 +34,10 @@ export {
   NotificationIcon,
   ProfileIconRounded,
   TGRLogo,
+  TransferActionIcon,
+  WithdrawActionIcon,
+  WalletActionIcon,
+  BlueAirtimeIcon,
+  BlueMobileDataIcon,
+  BlueSMEDataIcon,
 };
