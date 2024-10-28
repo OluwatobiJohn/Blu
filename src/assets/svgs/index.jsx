@@ -18,6 +18,10 @@ import WalletActionIcon from "./walletaction.svg?react";
 import BlueAirtimeIcon from "./blueairtime.svg?react";
 import BlueMobileDataIcon from "./bluemobiledata.svg?react";
 import BlueSMEDataIcon from "./bluesmedata.svg?react";
+import MtnLogo from "./mtnlogo.svg?react";
+import AirtelLogo from "./airtellogo.svg?react";
+import GloLogo from "./glologo.svg?react";
+import NineMobileLogo from "./ninemobilelogo.svg?react";
 
 export {
   HomeIcon,
@@ -40,4 +44,8 @@ export {
   BlueAirtimeIcon,
   BlueMobileDataIcon,
   BlueSMEDataIcon,
+  MtnLogo,
+  AirtelLogo,
+  GloLogo,
+  NineMobileLogo,
 };
