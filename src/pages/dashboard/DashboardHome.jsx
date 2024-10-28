@@ -4,10 +4,12 @@ import QuickLinkComp from "./components/QuickLinkComp";
 import Table from "../../components/ui/Table";
 
 const DashboardHome = () => {
-  const [itemsPerPage, setItemsPerPage] = React.useState(5);
+  const [itemsPerPage, setItemsPerPage] = React.useState(10);
   const [currentPage, setcurrentPage] = React.useState(1);
+  const [selectedRows, setSelectedRows] = React.useState([]);
 
   const columns = [
+    { key: "id", header: "#", isCheckbox: true },
     {
       key: "name",
       header: "Name",
@@ -15,6 +17,13 @@ const DashboardHome = () => {
     {
       key: "transaction",
       header: "Transaction",
+      editCell: (column) => {
+        return (
+          <div className="rounded-xl py-1 px-3 w-max bg-[#E3EFFC] text-sm">
+            {column.transaction}
+          </div>
+        );
+      },
     },
     {
       key: "amount",
@@ -32,6 +41,7 @@ const DashboardHome = () => {
 
   const data = [
     {
+      id: "transaction1",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -39,6 +49,7 @@ const DashboardHome = () => {
       date: "Apr 12, 2023 | 09:32AM",
     },
     {
+      id: "transaction2",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -46,6 +57,7 @@ const DashboardHome = () => {
       date: "Apr 12, 2023 | 09:32AM",
     },
     {
+      id: "transaction3",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -53,6 +65,7 @@ const DashboardHome = () => {
       date: "Apr 12, 2023 | 09:32AM",
     },
     {
+      id: "transaction4",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -60,6 +73,7 @@ const DashboardHome = () => {
       date: "Apr 12, 2023 | 09:32AM",
     },
     {
+      id: "transaction5",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -67,6 +81,7 @@ const DashboardHome = () => {
       date: "Apr 12, 2023 | 09:32AM",
     },
     {
+      id: "transaction6",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -74,6 +89,7 @@ const DashboardHome = () => {
       date: "Apr 12, 2023 | 09:32AM",
     },
     {
+      id: "transaction7",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -81,6 +97,7 @@ const DashboardHome = () => {
       date: "Apr 12, 2023 | 09:32AM",
     },
     {
+      id: "transaction8",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -88,6 +105,7 @@ const DashboardHome = () => {
       date: "Apr 12, 2023 | 09:32AM",
     },
     {
+      id: "transaction9",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -95,6 +113,7 @@ const DashboardHome = () => {
       date: "Apr 12, 2023 | 09:32AM",
     },
     {
+      id: "transaction10",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -102,6 +121,119 @@ const DashboardHome = () => {
       date: "Apr 12, 2023 | 09:32AM",
     },
     {
+      id: "transaction11",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction12",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction13",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction14",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction15",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction16",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction17",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction18",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction19",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction20",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction21",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction22",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction23",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction24",
+      name: "Saheed8084",
+      transaction: "transaction",
+      amount: "N200,000.00",
+      description: "Purchase of 300 Airtel 09011775126 by Saheed8084",
+      date: "Apr 12, 2023 | 09:32AM",
+    },
+    {
+      id: "transaction25",
       name: "Saheed8084",
       transaction: "transaction",
       amount: "N200,000.00",
@@ -139,7 +271,7 @@ const DashboardHome = () => {
         </div>
       </div>
       <div className="mt-10">
-        <h1 className="text-2xl font-semibold mb-5">Quick Links</h1>
+        <h1 className="text-xl md:text-3xl font-semibold mb-5">Quick Links</h1>
         <div className="flex flex-row overflow-auto">
           <QuickLinkComp name={"Testing"} handle={"@testing"} />
           <QuickLinkComp name={"Testing"} handle={"@testing"} />
@@ -158,7 +290,9 @@ const DashboardHome = () => {
         </div>
       </div>
       <div className="mt-10">
-        <h1 className="text-2xl font-semibold mb-5">My Commission</h1>
+        <h1 className="font-semibold text-xl md:text-3xl mb-5">
+          My Commission
+        </h1>
         <div className="overflow-auto">
           <Table
             data={data}
@@ -168,6 +302,8 @@ const DashboardHome = () => {
             totalPages={1}
             currentPage={currentPage}
             setcurrentPage={setcurrentPage}
+            selectedRows={selectedRows}
+            setSelectedRows={setSelectedRows}
           />
         </div>
       </div>

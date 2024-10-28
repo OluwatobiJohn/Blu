@@ -8,15 +8,17 @@ const Table = ({
   setItemsPerPage,
   currentPage,
   setcurrentPage,
+  selectedRows,
+  setSelectedRows,
 }) => {
   const [numbers, setNumbers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const hasCheckboxColumn = columns.some((column) => column.isCheckbox);
 
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage); // Dynamically calculate total pages
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
   useEffect(() => {
-    // Filter data based on search term
     const filtered = data.filter((item) =>
       Object.values(item).some((value) =>
         value?.toString().toLowerCase().includes(searchTerm.toLowerCase())
@@ -25,7 +27,6 @@ const Table = ({
     setFilteredData(filtered);
   }, [data, searchTerm]);
 
-  // Handle pagination by slicing data for current page
   const paginatedData = filteredData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
@@ -38,7 +39,6 @@ const Table = ({
   };
 
   useEffect(() => {
-    // Create an array of numbers for pagination buttons
     const numbersArray = [];
     for (let i = 1; i <= totalPages; i++) {
       numbersArray.push(i);
@@ -48,6 +48,25 @@ const Table = ({
 
   const getNestedPropertyValue = (obj, key) => {
     return _.get(obj, key, "");
+  };
+
+  // New function to toggle all rows selection
+  const toggleSelectAll = (isChecked) => {
+    if (isChecked) {
+      const allRowIds = filteredData.map((item) => item.id);
+      setSelectedRows(allRowIds);
+    } else {
+      setSelectedRows([]);
+    }
+  };
+
+  // New function to toggle individual row selection
+  const toggleRowSelection = (id) => {
+    setSelectedRows((prevSelectedRows) =>
+      prevSelectedRows.includes(id)
+        ? prevSelectedRows.filter((rowId) => rowId !== id)
+        : [...prevSelectedRows, id]
+    );
   };
 
   return (
@@ -69,7 +88,18 @@ const Table = ({
           <tr className="bg-[#F8FAFC]">
             {columns.map((column) => (
               <th key={column.key} className="px-2 py-5 border-b text-left">
-                {column.header}
+                {column.isCheckbox ? (
+                  <input
+                    type="checkbox"
+                    checked={
+                      selectedRows.length === filteredData.length &&
+                      filteredData.length > 0
+                    }
+                    onChange={(e) => toggleSelectAll(e.target.checked)}
+                  />
+                ) : (
+                  column.header
+                )}
               </th>
             ))}
           </tr>
@@ -84,6 +114,15 @@ const Table = ({
           )}
           {paginatedData.map((item, index) => (
             <tr key={index} className="hover:bg-[#cfdef8]">
+              {hasCheckboxColumn && (
+                <td className="p-2 border-b">
+                  <input
+                    type="checkbox"
+                    checked={selectedRows.includes(item.id)}
+                    onChange={() => toggleRowSelection(item.id)}
+                  />
+                </td>
+              )}
               {columns
                 .filter((column) => !column.isCheckbox)
                 .map((column) => (

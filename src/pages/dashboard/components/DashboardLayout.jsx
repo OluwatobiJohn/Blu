@@ -12,7 +12,7 @@ const DashboardLayout = () => {
   return (
     <SidebarProvider className="flex h-[100vh]">
       <AppSidebar />
-      <div className="w-full h-full px-2 md:px-4 pb-20 overflow-y-scroll">
+      <div className="w-full h-full px-2 md:px-4 pb-20 overflow-y-scroll bg-[#F9FAFB]">
         <div className="">
           <div className="flex flex-row justify-between items-center gap-7 fixed z-50 w-full text-left bg-white h-12">
             <SidebarTrigger className="fixed top-2" />
@@ -37,7 +37,7 @@ const DashboardLayout = () => {
             </div>
           </div>
         </div>
-        <div className="pt-12">
+        <div className="pt-16">
           <Outlet />
         </div>
       </div>
