@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import _ from "lodash";
 
 const Table = ({
@@ -15,6 +15,9 @@ const Table = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const hasCheckboxColumn = columns.some((column) => column.isCheckbox);
+
+  const tableRef = useRef(null);
+  const paginationClicked = useRef(false);
 
   const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
@@ -35,6 +38,7 @@ const Table = ({
   const handleChangePage = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       setcurrentPage(newPage);
+      paginationClicked.current = true;
     }
   };
 
@@ -50,7 +54,6 @@ const Table = ({
     return _.get(obj, key, "");
   };
 
-  // New function to toggle all rows selection
   const toggleSelectAll = (isChecked) => {
     if (isChecked) {
       const allRowIds = filteredData.map((item) => item.id);
@@ -60,7 +63,6 @@ const Table = ({
     }
   };
 
-  // New function to toggle individual row selection
   const toggleRowSelection = (id) => {
     setSelectedRows((prevSelectedRows) =>
       prevSelectedRows.includes(id)
@@ -69,8 +71,15 @@ const Table = ({
     );
   };
 
+  useEffect(() => {
+    if (paginationClicked.current && tableRef.current) {
+      tableRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      paginationClicked.current = false; // Reset after scrolling
+    }
+  }, [currentPage]);
+
   return (
-    <div className="max-w-full mx-auto p-4 bg-white text-sm">
+    <div ref={tableRef} className="max-w-full mx-auto p-4 bg-white text-sm">
       <div className="flex flex-row justify-between items-center">
         <div>
           <input
@@ -123,21 +132,21 @@ const Table = ({
                   />
                 </td>
               )}
-              {columns
-                .filter((column) => !column.isCheckbox)
-                .map((column) => (
-                  <td key={column.key} className="py-5 px-2 border-b">
-                    {column.editCell
-                      ? column.editCell(item)
-                      : getNestedPropertyValue(item, column.key) || "-"}
-                  </td>
-                ))}
+              {columns.map((column) => (
+                <td key={column.key} className="py-5 px-2 border-b">
+                  {column.key === "serialNumber"
+                    ? (currentPage - 1) * itemsPerPage + index + 1
+                    : column.editCell
+                    ? column.editCell(item)
+                    : getNestedPropertyValue(item, column.key) || "-"}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
       </table>
 
-      <div className="w-full mt-4 flex justify-between items-center gap-4">
+      <div className="w-screen md:w-full mt-4 flex justify-between items-center gap-4">
         <div className="flex-1">
           <span className="text-sm text-gray-600">{`Page ${currentPage} of ${totalPages}`}</span>
         </div>
