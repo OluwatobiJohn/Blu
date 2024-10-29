@@ -24,12 +24,12 @@ const Airtime = () => {
   return (
     <div className="text-left w-full">
       <div>
-        <h1 className="font-semibold text-xl md:text-3xl">Airtime Recharge</h1>
+        <h1 className="font-semibold text-3xl">Airtime Recharge</h1>
       </div>
-      <div className="w-full max-w-[44rem] mx-auto bg-white my-24 p-3 md:p-5">
+      <div className="w-full max-w-[44rem] mx-auto bg-white my-14 md:my-24 p-3 md:p-5">
         <p className="text-xl font-medium">Select your desired provider</p>
         <form>
-          <div className="flex flex-row justify-between items-center mt-10 font-medium">
+          <div className="flex flex-row gap-3 md:justify-between items-center flex-wrap mt-10 font-medium">
             {carriers.map((carrier) => (
               <div
                 key={carrier.name}
