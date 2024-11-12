@@ -4,6 +4,7 @@ import {
   GloLogo,
   AirtelLogo,
   NineMobileLogo,
+  CancelIcon,
 } from "../../assets/svgs";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
@@ -14,9 +15,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../components/ui/select";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "../../components/ui/drawer";
 
 const SMEData = () => {
   const [selectedCarrier, setSelectedCarrier] = useState("");
+  const [phoneNumber, setphoneNumber] = useState("");
+  const [rechargeBundle, setrechargeBundle] = useState("");
 
   const carriers = [
     { name: "MTN", logo: <MtnLogo /> },
@@ -40,9 +52,9 @@ const SMEData = () => {
             {carriers.map((carrier) => (
               <div
                 key={carrier.name}
-                onClick={() => handleCarrierClick(carrier.name)}
+                onClick={() => handleCarrierClick(carrier)}
                 className={`flex flex-row gap-7 items-center bg-[#F8F8F9] rounded-xl py-2 px-4 cursor-pointer ${
-                  selectedCarrier === carrier.name
+                  selectedCarrier?.name === carrier.name
                     ? "border border-[#189B62]"
                     : ""
                 }`}
@@ -54,11 +66,19 @@ const SMEData = () => {
           </div>
           <div className="mt-10">
             <label className="text-sm">Enter receive number</label>
-            <Input />
+            <Input
+              value={phoneNumber}
+              onChange={(e) => {
+                setphoneNumber(e.target.value);
+              }}
+            />
           </div>
           <div className="mt-5">
             <label className="text-sm">Select Bundle</label>
-            <Select>
+            <Select
+              value={rechargeBundle}
+              onValueChange={(value) => setrechargeBundle(value)}
+            >
               <SelectTrigger className="">
                 <SelectValue placeholder="Select Bundle" />
               </SelectTrigger>
@@ -70,7 +90,53 @@ const SMEData = () => {
             </Select>
           </div>
           <div className="mt-10">
-            <Button className="w-full h-14">Next</Button>
+            {selectedCarrier && phoneNumber && rechargeBundle ? (
+              <Drawer>
+                <DrawerTrigger asChild>
+                  <Button className="w-full h-14">Next</Button>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader className="relative">
+                    <DrawerTitle>Overview</DrawerTitle>
+                    <div className="absolute left-[90%] top-4">
+                      <DrawerClose>
+                        <CancelIcon />
+                      </DrawerClose>
+                    </div>
+                  </DrawerHeader>
+                  <div className="flex flex-col items-center justify-center px-5">
+                    {selectedCarrier && (
+                      <div className="flex items-center gap-3">
+                        {selectedCarrier.logo}
+                      </div>
+                    )}
+                    <div className="my-4 p-4 rounded-xl bg-[#F0FADE] w-full max-w-[30rem] flex flex-col gap-2">
+                      <div className="flex flex-row justify-between items-center">
+                        <p>Bundle:</p>
+                        <p>{rechargeBundle}</p>
+                      </div>
+                      <div className="flex flex-row justify-between items-center">
+                        <p>Number:</p>
+                        <p>{phoneNumber}</p>
+                      </div>
+                      <div className="flex flex-row justify-between items-center">
+                        <p>Network:</p>
+                        <p>{selectedCarrier.name}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <DrawerFooter className="flex items-center">
+                    <Button className="w-full md:w-1/2">
+                      Load {rechargeBundle}
+                    </Button>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
+            ) : (
+              <Button className="w-full h-14" disabled>
+                Next
+              </Button>
+            )}
           </div>
         </form>
       </div>

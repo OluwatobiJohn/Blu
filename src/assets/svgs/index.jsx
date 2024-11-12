@@ -23,6 +23,7 @@ import AirtelLogo from "./airtellogo.svg?react";
 import GloLogo from "./glologo.svg?react";
 import NineMobileLogo from "./ninemobilelogo.svg?react";
 import ProfitChartIcon from "./chartsquare.svg?react";
+import CancelIcon from "./cancelicon.svg?react";
 
 export {
   HomeIcon,
@@ -50,4 +51,5 @@ export {
   GloLogo,
   NineMobileLogo,
   ProfitChartIcon,
+  CancelIcon,
 };

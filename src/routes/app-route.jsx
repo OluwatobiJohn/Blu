@@ -8,9 +8,7 @@ import { Suspense } from "react";
 const AppRoute = () => {
   return (
     <Routes>
-      {/* Redirect to login as soon as app mounts */}
       <Route path="/" element={<Navigate to="/auth/login" replace />} />
-      {/* Redirect to login as soon as app mounts */}
 
       {/* Auth Routes */}
       <Route path="auth" element={<OnboardLayout />}>

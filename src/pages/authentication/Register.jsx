@@ -85,12 +85,20 @@ const Stepper = ({ activeStep }) => {
   );
 };
 
+const MobileStepper = ({ activeStep }) => {
+  return (
+    <div className="py-3 px-4 rounded-xl bg-[#F4F5F9] text-[#645D5D] text-left w-max">
+      Step {activeStep}/4 {activeStep === 1 && "Profile Information"}
+      {activeStep === 2 && "Login Details"}
+      {activeStep === 3 && "Bank Details"}
+      {activeStep === 4 && "Bank Details"}
+    </div>
+  );
+};
+
 const ProfileInfoForm = ({ onNext, onPrevious }) => {
   return (
-    <div className="bg-white pt-10">
-      <p className="text-[#0C1421] text-4xl font-semibold mb-7">
-        Fill Form to Register
-      </p>
+    <div className="bg-white">
       <form className="max-w-[30rem] mx-auto text-left grid grid-cols-6 gap-y-5 gap-x-3">
         <div className="col-span-6">
           <label className="text-sm">Referal ID</label>
@@ -144,9 +152,6 @@ const ProfileInfoForm = ({ onNext, onPrevious }) => {
 const LoginDetailsForm = ({ onNext, onPrevious }) => {
   return (
     <div className="bg-white pt-10">
-      <p className="text-[#0C1421] text-4xl font-semibold mb-7">
-        Fill Form to Register
-      </p>
       <form className="max-w-[30rem] mx-auto text-left grid grid-cols-6 gap-y-5 gap-x-3">
         <div className="col-span-6">
           <label className="text-sm">Username</label>
@@ -160,7 +165,7 @@ const LoginDetailsForm = ({ onNext, onPrevious }) => {
           <label className="text-sm">Confirm Password</label>
           <PasswordInput />
         </div>
-        <div className="mt-10 col-span-6 flex flex-row gap-2">
+        <div className="mt-10 col-span-6 flex flex-col-reverse sm:flex-row gap-2">
           <Button
             className="w-full h-14"
             variant="secondary"
@@ -202,9 +207,6 @@ const LoginDetailsForm = ({ onNext, onPrevious }) => {
 const BankDetailsForm = ({ onNext, onPrevious }) => {
   return (
     <div className="bg-white pt-10">
-      <p className="text-[#0C1421] text-4xl font-semibold mb-7">
-        Fill Form to Register
-      </p>
       <form className="max-w-[30rem] mx-auto text-left grid grid-cols-6 gap-y-5 gap-x-3">
         <div className="col-span-6">
           <label className="text-sm">Bank</label>
@@ -218,7 +220,7 @@ const BankDetailsForm = ({ onNext, onPrevious }) => {
           <label className="text-sm">Account Number</label>
           <Input />
         </div>
-        <div className="mt-10 col-span-6 flex flex-row gap-2">
+        <div className="mt-10 col-span-6 flex flex-col-reverse sm:flex-row gap-2">
           <Button
             className="w-full h-14"
             variant="secondary"
@@ -266,7 +268,18 @@ const Register = () => {
         <img src={logotgr} alt="logo" className="absolute top-10" />
       </div>
       <div className="mt-20">
-        <Stepper activeStep={activeStep} />
+        <div className="hidden md:block">
+          <Stepper activeStep={activeStep} />
+        </div>
+        <div className="block md:hidden">
+          <MobileStepper activeStep={activeStep} />
+        </div>
+        <p className="text-[#0C1421] text-4xl font-semibold my-7 hidden md:block">
+          Fill Form to Register
+        </p>
+        <p className="text-[#0C1421] text-4xl text-left font-semibold my-7 block md:hidden">
+          Register
+        </p>
         <div>
           {activeStep === 1 && (
             <ProfileInfoForm onNext={() => setActiveStep(2)} />

@@ -16,7 +16,14 @@ const Login = () => {
           <p className="text-[#0C1421] text-4xl font-semibold">Welcome back!</p>
           <p className="text-sm mt-2">
             Don’t have an account?
-            <span className="text-[#EA0000] font-semibold ml-1">Sign Up</span>
+            <span
+              className="text-[#EA0000] font-semibold ml-1"
+              onClick={() => {
+                window.location.href = "/auth/register";
+              }}
+            >
+              Sign Up
+            </span>
           </p>
         </div>
         <div className="mt-8">
@@ -27,7 +34,7 @@ const Login = () => {
             </div>
             <div className="mt-5">
               <label className="text-sm">Password</label>
-              <PasswordInput/>
+              <PasswordInput />
             </div>
             <div className="mt-5 flex flex-row items-center gap-2">
               <Input className="w-max" type="checkbox" />

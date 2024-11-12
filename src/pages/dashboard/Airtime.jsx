@@ -4,12 +4,24 @@ import {
   GloLogo,
   AirtelLogo,
   NineMobileLogo,
+  CancelIcon,
 } from "../../assets/svgs";
 import { Input } from "../../components/ui/input";
 import { Button } from "../../components/ui/button";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "../../components/ui/drawer";
 
 const Airtime = () => {
   const [selectedCarrier, setSelectedCarrier] = useState("");
+  const [phoneNumber, setphoneNumber] = useState("");
+  const [rechargeAmount, setrechargeAmount] = useState("");
 
   const carriers = [
     { name: "MTN", logo: <MtnLogo /> },
@@ -21,6 +33,7 @@ const Airtime = () => {
   const handleCarrierClick = (carrier) => {
     setSelectedCarrier(carrier);
   };
+
   return (
     <div className="text-left w-full">
       <div>
@@ -33,9 +46,9 @@ const Airtime = () => {
             {carriers.map((carrier) => (
               <div
                 key={carrier.name}
-                onClick={() => handleCarrierClick(carrier.name)}
+                onClick={() => handleCarrierClick(carrier)}
                 className={`flex flex-row gap-7 items-center bg-[#F8F8F9] rounded-xl py-2 px-4 cursor-pointer ${
-                  selectedCarrier === carrier.name
+                  selectedCarrier?.name === carrier.name
                     ? "border border-[#189B62]"
                     : ""
                 }`}
@@ -46,15 +59,71 @@ const Airtime = () => {
             ))}
           </div>
           <div className="mt-10">
-            <label className="text-sm">Enter receive number</label>
-            <Input />
+            <label className="text-sm">Enter receiver number</label>
+            <Input
+              value={phoneNumber}
+              onChange={(e) => {
+                setphoneNumber(e.target.value);
+              }}
+            />
           </div>
           <div className="mt-5">
             <label className="text-sm">Enter amount</label>
-            <Input />
+            <Input
+              value={rechargeAmount}
+              onChange={(e) => {
+                setrechargeAmount(e.target.value);
+              }}
+            />
           </div>
           <div className="mt-10">
-            <Button className="w-full h-14">Next</Button>
+            {selectedCarrier && phoneNumber && rechargeAmount ? (
+              <Drawer>
+                <DrawerTrigger asChild>
+                  <Button className="w-full h-14">Next</Button>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader className="relative">
+                    <DrawerTitle>Overview</DrawerTitle>
+                    <div className="absolute left-[90%] top-4">
+                      <DrawerClose>
+                        <CancelIcon />
+                      </DrawerClose>
+                    </div>
+                  </DrawerHeader>
+                  <div className="flex flex-col items-center justify-center px-5">
+                    {selectedCarrier && (
+                      <div className="flex items-center gap-3">
+                        {selectedCarrier.logo}
+                      </div>
+                    )}
+                    <div className="my-4 p-4 rounded-xl bg-[#F0FADE] w-full max-w-[30rem] flex flex-col gap-2">
+                      <div className="flex flex-row justify-between items-center">
+                        <p>Amount:</p>
+                        <p>{rechargeAmount}</p>
+                      </div>
+                      <div className="flex flex-row justify-between items-center">
+                        <p>Number:</p>
+                        <p>{phoneNumber}</p>
+                      </div>
+                      <div className="flex flex-row justify-between items-center">
+                        <p>Network:</p>
+                        <p>{selectedCarrier.name}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <DrawerFooter className="flex items-center">
+                    <Button className="w-full md:w-1/2">
+                      Load {rechargeAmount}
+                    </Button>
+                  </DrawerFooter>
+                </DrawerContent>
+              </Drawer>
+            ) : (
+              <Button className="w-full h-14" disabled>
+                Next
+              </Button>
+            )}
           </div>
         </form>
       </div>
