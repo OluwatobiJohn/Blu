@@ -2,6 +2,7 @@ import React from "react";
 import StatsCard from "./components/StatsCard";
 import QuickLinkComp from "./components/QuickLinkComp";
 import Table from "../../components/ui/Table";
+import { ChevronRight } from "lucide-react";
 
 const DashboardHome = () => {
   const [itemsPerPage, setItemsPerPage] = React.useState(10);
@@ -9,34 +10,20 @@ const DashboardHome = () => {
   const [selectedRows, setSelectedRows] = React.useState([]);
 
   const columns = [
-    { key: "id", header: "#", isCheckbox: true },
-    {
-      key: "name",
-      header: "Name",
-    },
+    { key: "id", header: "#", isCheckbox: true }, // This will be hidden
+    { key: "name", header: "Name" },
     {
       key: "transaction",
       header: "Transaction",
-      editCell: (column) => {
-        return (
-          <div className="rounded-xl py-1 px-3 w-max bg-[#E3EFFC] text-sm">
-            {column.transaction}
-          </div>
-        );
-      },
+      editCell: (column) => (
+        <div className="rounded-xl py-1 px-3 w-max bg-[#E3EFFC] text-sm">
+          {column.transaction}
+        </div>
+      ),
     },
-    {
-      key: "amount",
-      header: "Amount",
-    },
-    {
-      key: "description",
-      header: "Description",
-    },
-    {
-      key: "date",
-      header: "Date",
-    },
+    { key: "amount", header: "Amount" },
+    { key: "description", header: "Description" },
+    { key: "date", header: "Date" },
   ];
 
   const data = [
@@ -271,7 +258,15 @@ const DashboardHome = () => {
         </div>
       </div>
       <div className="mt-10">
-        <h1 className="text-xl md:text-3xl font-semibold mb-5">Quick Links</h1>
+        <div className="flex flex-row justify-between items-center">
+          <h1 className="text-xl md:text-2xl font-semibold mb-5">
+            Quick Links
+          </h1>
+          <div className="flex flex-row justify-center items-center gap-1 text-[#EA0000]">
+            <p>See all beneficaries</p>
+            <ChevronRight />
+          </div>
+        </div>
         <div className="flex flex-row overflow-auto">
           <QuickLinkComp name={"Testing"} handle={"@testing"} />
           <QuickLinkComp name={"Testing"} handle={"@testing"} />

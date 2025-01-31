@@ -78,6 +78,9 @@ const Table = ({
     }
   }, [currentPage]);
 
+  // Filter out the `id` column from being displayed
+  const visibleColumns = columns.filter((column) => column.key !== "id");
+
   return (
     <div ref={tableRef} className="max-w-full mx-auto p-4 bg-white text-sm">
       <div className="flex flex-row justify-between items-center">
@@ -95,20 +98,21 @@ const Table = ({
       <table className="w-full border">
         <thead>
           <tr className="bg-[#F8FAFC]">
-            {columns.map((column) => (
+            {hasCheckboxColumn && (
+              <th className="px-2 py-5 border-b text-left">
+                <input
+                  type="checkbox"
+                  checked={
+                    selectedRows.length === filteredData.length &&
+                    filteredData.length > 0
+                  }
+                  onChange={(e) => toggleSelectAll(e.target.checked)}
+                />
+              </th>
+            )}
+            {visibleColumns.map((column) => (
               <th key={column.key} className="px-2 py-5 border-b text-left">
-                {column.isCheckbox ? (
-                  <input
-                    type="checkbox"
-                    checked={
-                      selectedRows.length === filteredData.length &&
-                      filteredData.length > 0
-                    }
-                    onChange={(e) => toggleSelectAll(e.target.checked)}
-                  />
-                ) : (
-                  column.header
-                )}
+                {column.header}
               </th>
             ))}
           </tr>
@@ -116,7 +120,10 @@ const Table = ({
         <tbody>
           {paginatedData.length === 0 && (
             <tr>
-              <td colSpan={columns.length + 1} className="text-center py-4">
+              <td
+                colSpan={visibleColumns.length + (hasCheckboxColumn ? 1 : 0)}
+                className="text-center py-4"
+              >
                 <p className="text-red-500">No Results Found</p>
               </td>
             </tr>
@@ -132,7 +139,7 @@ const Table = ({
                   />
                 </td>
               )}
-              {columns.map((column) => (
+              {visibleColumns.map((column) => (
                 <td key={column.key} className="py-5 px-2 border-b">
                   {column.key === "serialNumber"
                     ? (currentPage - 1) * itemsPerPage + index + 1
