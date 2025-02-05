@@ -11,7 +11,7 @@ import LogoutIcon from "./logout.svg?react";
 import WalletIcon from "./walleticon.svg?react";
 import NotificationIcon from "./notificationicon.svg?react";
 import ProfileIconRounded from "./profileicon.svg?react";
-import TGRLogo from "./TGR.svg?react";
+import Logo from "./Logo.svg?react";
 import TransferActionIcon from "./transferaction.svg?react";
 import WithdrawActionIcon from "./withdrawaction.svg?react";
 import WalletActionIcon from "./walletaction.svg?react";
@@ -24,6 +24,7 @@ import GloLogo from "./glologo.svg?react";
 import NineMobileLogo from "./ninemobilelogo.svg?react";
 import ProfitChartIcon from "./chartsquare.svg?react";
 import CancelIcon from "./cancelicon.svg?react";
+import BugIcon from "./BugBeetle.svg?react";
 
 export {
   HomeIcon,
@@ -39,7 +40,7 @@ export {
   WalletIcon,
   NotificationIcon,
   ProfileIconRounded,
-  TGRLogo,
+  Logo,
   TransferActionIcon,
   WithdrawActionIcon,
   WalletActionIcon,
@@ -52,4 +53,5 @@ export {
   NineMobileLogo,
   ProfitChartIcon,
   CancelIcon,
+  BugIcon,
 };

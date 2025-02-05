@@ -1,28 +1,5 @@
 import { lazy } from "react";
 
-export const authPagesRoute = [
-  {
-    path: "register",
-    exact: true,
-    component: lazy(() => import("@/pages/authentication/Register")),
-  },
-  {
-    path: "login",
-    exact: true,
-    component: lazy(() => import("@/pages/authentication/Login")),
-  },
-  {
-    path: "forgotpassword",
-    exact: true,
-    component: lazy(() => import("@/pages/authentication/ForgotPassword")),
-  },
-  {
-    path: "newpassword/confirm",
-    exact: true,
-    component: lazy(() => import("@/pages/authentication/NewPassword")),
-  },
-];
-
 export const authProtectedPagesRoute = [
   {
     path: "home",
@@ -30,43 +7,43 @@ export const authProtectedPagesRoute = [
     component: lazy(() => import("@/pages/dashboard/DashboardHome")),
   },
   {
-    path: "transactions",
+    path: "requests",
     exact: true,
-    component: lazy(() => import("@/pages/dashboard/Transactions")),
+    component: lazy(() => import("@/pages/dashboard/DashboardHome")),
   },
   {
     path: "earnings",
     exact: true,
-    component: lazy(() => import("@/pages/dashboard/Earnings")),
+    component: lazy(() => import("@/pages/dashboard/DashboardHome")),
   },
   {
     path: "airtime",
     exact: true,
-    component: lazy(() => import("@/pages/dashboard/Airtime")),
+    component: lazy(() => import("@/pages/dashboard/DashboardHome")),
   },
   {
     path: "mobiledata",
     exact: true,
-    component: lazy(() => import("@/pages/dashboard/MobileData")),
+    component: lazy(() => import("@/pages/dashboard/DashboardHome")),
   },
   {
     path: "sme",
     exact: true,
-    component: lazy(() => import("@/pages/dashboard/SMEData")),
+    component: lazy(() => import("@/pages/dashboard/DashboardHome")),
   },
   {
     path: "refer-and-earn",
     exact: true,
-    component: lazy(() => import("@/pages/dashboard/ReferAndEarn")),
+    component: lazy(() => import("@/pages/dashboard/DashboardHome")),
   },
   {
     path: "settings",
     exact: true,
-    component: lazy(() => import("@/pages/dashboard/Settings")),
+    component: lazy(() => import("@/pages/dashboard/DashboardHome")),
   },
   {
     path: "support",
     exact: true,
-    component: lazy(() => import("@/pages/dashboard/Support")),
+    component: lazy(() => import("@/pages/dashboard/DashboardHome")),
   },
 ];

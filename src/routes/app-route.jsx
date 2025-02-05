@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import OnboardLayout from "../pages/authentication/components/OnboardLayout";
-import { authPagesRoute, authProtectedPagesRoute } from ".";
+import { authProtectedPagesRoute } from ".";
 import DashboardLayout from "../pages/dashboard/components/DashboardLayout";
 import ProtectedRoute from "./ProtectedRoute";
 import { Suspense } from "react";
@@ -8,15 +7,7 @@ import { Suspense } from "react";
 const AppRoute = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/auth/login" replace />} />
-
-      {/* Auth Routes */}
-      <Route path="auth" element={<OnboardLayout />}>
-        {authPagesRoute.map(({ component: Component, path }) => (
-          <Route path={path} key={path} element={<Component />} />
-        ))}
-      </Route>
-      {/* Auth Routes */}
+      <Route path="/" element={<Navigate to="/app/home" replace />} />
 
       {/* Dashboard Routes */}
       <Route path="app" element={<DashboardLayout />}>

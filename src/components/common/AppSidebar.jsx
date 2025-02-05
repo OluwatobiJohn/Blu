@@ -10,7 +10,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { LogoutIcon, TGRLogo } from "../../assets/svgs";
+import { LogoutIcon, Logo } from "../../assets/svgs";
 import { SIDEBAR_CONSTANTS } from "../../lib/constants";
 
 export function AppSidebar() {
@@ -23,13 +23,13 @@ export function AppSidebar() {
       return (
         <SidebarMenuItem key={item.text || index}>
           <SidebarMenuButton asChild isActive={isActive}>
-            <NavLink to={item.link}>
+            <NavLink to={item.inactive === true ? "#" : item.link}>
               <item.icon
-                className={isActive ? "text-[#EB3333]" : "text-[#98A2B3]"}
+                className={isActive ? "text-[#161716]" : "text-[#292D32]"}
               />
               <span
                 className={`text-sm ${
-                  isActive ? "text-[#F0F2F5] font-semibold" : "text-[#98A2B3]"
+                  isActive ? "text-[#161716] font-black" : "text-[#292D32]"
                 }`}
               >
                 {item.text}
@@ -43,53 +43,37 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarContent className="bg-[#101928]">
+      <SidebarContent className="bg-white">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem className="flex items-center justify-between">
-                <SidebarMenuButton asChild>
-                  <TGRLogo className="w-24 h-24" />
-                </SidebarMenuButton>
-                <div className="block md:hidden">
-                  <SidebarTrigger className="text-white" />
+              <SidebarMenuItem className="flex items-center justify-between md:justify-center mb-6">
+                {/* <SidebarMenuButton asChild>
+                  <Logo className="w-24 h-24" />
+                </SidebarMenuButton> */}
+                <div className="block md:hidden absolute left-56">
+                  <SidebarTrigger className="text-black" />
+                </div>
+                <div className="flex justify-center items-center">
+                  <Logo className="w-24 h-10" />
                 </div>
               </SidebarMenuItem>
-
-              {/* Render the first 7 items */}
-              {renderSidebarItems(SIDEBAR_CONSTANTS, 0, 7)}
             </SidebarMenu>
 
-            {/* Second set of items, index 7 to 9 */}
-            <SidebarMenu className="mt-32">
-              {renderSidebarItems(SIDEBAR_CONSTANTS, 7, 9)}
+            <SidebarMenu>
+              {renderSidebarItems(SIDEBAR_CONSTANTS, 0, 2)}
             </SidebarMenu>
-
-            {/* Logout and user info */}
-            <SidebarMenu className="flex justify-between items-center text-sm text-white mt-4">
-              <SidebarMenuItem>
-                <SidebarMenuButton
-                  asChild
-                  className="h-28 hover:bg-inherit hover:text-white"
-                >
-                  <div className="flex flex-row-reverse gap-8">
-                    <LogoutIcon className="cursor-pointer" />
-                    <div className="flex items-end gap-2">
-                      <Avatar className="w-[2.4rem] h-[2.4rem]">
-                        <AvatarImage
-                          src="https://github.com/shadcn.png"
-                          alt="@shadcn"
-                        />
-                        <AvatarFallback>CN</AvatarFallback>
-                      </Avatar>
-                      <div className="flex flex-col items-start">
-                        <p className="font-semibold">Alison Eyo</p>
-                        <p>@thealisoneyo</p>
-                      </div>
-                    </div>
-                  </div>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+            <hr className="my-2" />
+            <SidebarMenu>
+              {renderSidebarItems(SIDEBAR_CONSTANTS, 2, 5)}
+            </SidebarMenu>
+            <hr className="my-2" />
+            <SidebarMenu>
+              {renderSidebarItems(SIDEBAR_CONSTANTS, 5, 7)}
+            </SidebarMenu>
+            <hr className="my-2" />
+            <SidebarMenu>
+              {renderSidebarItems(SIDEBAR_CONSTANTS, 7, 10)}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
