@@ -1,12 +1,8 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "../../../components/common/Sidebar";
-import {
-  NotificationIcon,
-  ProfileIconRounded,
-  WalletIcon,
-} from "../../../assets/svgs";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { Input } from "@/components/ui/input";
 import { AppSidebar } from "../../../components/common/AppSidebar";
+import { Bell, Clock10, Notebook, Sun } from "lucide-react";
 
 const DashboardLayout = () => {
   return (
@@ -16,22 +12,15 @@ const DashboardLayout = () => {
         <div className="">
           <div className="flex flex-row justify-between items-center gap-7 fixed z-50 w-full text-left bg-white h-12">
             <SidebarTrigger className="block md:hidden fixed top-2" />
-            <div className="flex flex-row items-center justify-end gap-5 fixed top-2 right-4">
-              <div>
-                <NotificationIcon />
-              </div>
-              <div className="flex flex-row items-center gap-3 text-[#344054]">
-                <div className="flex flex-row items-center gap-2">
-                  <ProfileIconRounded />
-                  <p className="text-sm font-semibold hidden md:block">
-                    Amedora33
-                  </p>
-                </div>
-                <div className="flex flex-row items-center gap-2">
-                  <WalletIcon />
-                  <p className="text-sm font-semibold hidden md:block">
-                    N230,039
-                  </p>
+            <div className="fixed flex flex-row items-center">
+              <div className="font-bold ml-7 md:ml-0 md:text-xl">Dashboard</div>
+              <div className="flex flex-row gap-3 fixed top-2 right-4">
+                <Input type="search" placeholder="search" />
+                <div className="mt-1 flex flex-row items-center gap-3">
+                  <Sun />
+                  <Clock10 />
+                  <Bell />
+                  <Notebook />
                 </div>
               </div>
             </div>

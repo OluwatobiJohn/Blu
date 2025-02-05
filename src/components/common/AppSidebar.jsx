@@ -47,7 +47,7 @@ export function AppSidebar() {
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem className="flex items-center justify-between md:justify-center mb-6">
+              <SidebarMenuItem className="flex items-center justify-between md:justify-center mb-5">
                 {/* <SidebarMenuButton asChild>
                   <Logo className="w-24 h-24" />
                 </SidebarMenuButton> */}
@@ -55,7 +55,7 @@ export function AppSidebar() {
                   <SidebarTrigger className="text-black" />
                 </div>
                 <div className="flex justify-center items-center">
-                  <Logo className="w-24 h-10" />
+                  <Logo className="w-24 h-8" />
                 </div>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -74,6 +74,22 @@ export function AppSidebar() {
             <hr className="my-2" />
             <SidebarMenu>
               {renderSidebarItems(SIDEBAR_CONSTANTS, 7, 10)}
+            </SidebarMenu>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <NavLink to={"#"}>
+                  <div className="mt-10 flex flex-row gap-3 items-center">
+                    <Avatar className="w-[2.5rem] h-[2.5rem]">
+                      <AvatarImage
+                        src="https://github.com/shadcn.png"
+                        alt="@shadcn"
+                      />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                    <p className={`text-sm text-[#161716]`}>ByeWind</p>
+                  </div>
+                </NavLink>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
